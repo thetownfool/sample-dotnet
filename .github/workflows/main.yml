@@ -302,79 +302,8 @@ jobs:
         with:
           MOCK_STEP_NAME: "Deploy Step 13"
           
-  dr-api-prod:
-    name: DR API
-    runs-on: ubuntu-latest
-    needs: deploy-api-prod
-    environment:
-      name: 'DR'
-      url: api.sample-dotnet.local
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: 'DR Step 1'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 1"
-
-      - name: 'DR Step 2'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 2"
-
-      - name: 'DR Step 3'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 13"
-          
-  dr-fe-prod:
-    name: DR Front End
-    runs-on: ubuntu-latest
-    needs: deploy-fe-prod
-    environment:
-      name: 'DR'
-      url: fe.sample-dotnet.local
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: 'DR Step 1'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 1"
-
-      - name: 'DR Step 2'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 2"
-
-      - name: 'DR Step 3'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Deploy Step 13"
-          
-  test-smoke-dr:
-    name: Smoke Test in DR
-    needs: [dr-api-prod, dr-fe-prod]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: 'Smoke Test Step 1'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Test Step 1"
-
-      - name: 'Smoke Test Step 2'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Test Step 2"
-
-      - name: 'Smoke Test Step 3'
-        uses: ./.github/actions/hello
-        with:
-          MOCK_STEP_NAME: "Test Step 13"
+  dr-prep-prod:
+    name: DR Prep
+    needs: [deploy-api-prod,deploy-fe-prod]
+    uses: ./.github/workflows/dr.yml
+   
