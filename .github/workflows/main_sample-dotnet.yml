@@ -4,10 +4,10 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - sample-dotnet
 
 on:
-  push:
-    branches:
-      - main
-      - 'feature/**'
+  #push:
+  #  branches:
+  #    - main
+  #    - 'feature/**'
   workflow_dispatch:
 
 jobs:
